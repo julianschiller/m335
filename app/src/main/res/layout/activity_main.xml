@@ -25,42 +25,48 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginHorizontal="10dp">
+        android:layout_marginHorizontal="10dp"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/add_media"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:backgroundTint="#D93434"
-            android:text="+"
-            android:layout_weight="1"/>
+            android:text="+" />
 
         <Spinner
             android:id="@+id/spinner_sort_field"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
             android:layout_marginHorizontal="5dp"
-            android:entries="@array/sort_field"
-            />
+            android:layout_weight="2"
+            android:entries="@array/sort_field" />
 
         <Spinner
             android:id="@+id/spinner_sort_direction"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:entries="@array/sort_direction"/>
+            android:entries="@array/sort_direction" />
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_marginHorizontal="5dp"
         android:layout_marginTop="10dp"
-        android:layout_marginHorizontal="5dp">
+        android:layout_weight="1">
 
-    </androidx.recyclerview.widget.RecyclerView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/media_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </ScrollView>
 
 
 </LinearLayout>
