@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
     private void loadMedias() {
         MediaApi api = RetrofitFactory.getRetrofitInstance().create(MediaApi.class);
 
-        api.getMedia().enqueue(new Callback<List<Medium>>() {
+        api.getMedias().enqueue(new Callback<List<Medium>>() {
             @Override
             public void onResponse(@NonNull Call<List<Medium>> call, @NonNull Response<List<Medium>> response) {
                 if (response.isSuccessful() && response.body() != null) {

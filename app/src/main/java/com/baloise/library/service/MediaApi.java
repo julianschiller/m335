@@ -14,8 +14,12 @@ import retrofit2.http.Path;
 
 public interface MediaApi {
 
+    @GET("/bibliothek/medium/{id}")
+    Call<Medium> getMedia(@Path("id") int id);
+
+
     @GET("/bibliothek/medien")
-    Call<List<Medium>> getMedia();
+    Call<List<Medium>> getMedias();
 
     @POST("medium")
     Call<Medium> createMedia(@Body Medium medium);

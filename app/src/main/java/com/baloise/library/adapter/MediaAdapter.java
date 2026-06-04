@@ -1,5 +1,6 @@
 package com.baloise.library.adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +10,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.baloise.library.MediaManageActivity;
 import com.baloise.library.R;
 import com.baloise.library.common.Medium;
 
 import java.util.List;
+
+import kotlin.time.Instant;
 
 public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaViewHolder> {
 
@@ -66,7 +70,12 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaViewHol
         });
 
         holder.itemView.setOnClickListener(view -> {
+            Intent intent = new Intent(view.getContext(), MediaManageActivity.class);
 
+            intent.putExtra("medium_id", m.getId());
+            intent.putExtra("create", false);
+
+            view.getContext().startActivity(intent);
         });
     }
 
