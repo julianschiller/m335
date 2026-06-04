@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MediaManageActivity"
+    android:orientation="vertical">
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Titel *"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="15dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Autor *"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="15dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_author"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Genre"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="15dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_genre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="ISBN"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="15dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_isbn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Regal-Bezeichnung"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="15dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_location_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Altersfreigabe"
+        android:layout_marginHorizontal="15dp"
+        android:layout_marginVertical="15dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_age"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp">
+
+        <Button
+            android:id="@+id/save_media"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#1cc744"
+            android:text="Speichern"
+            android:layout_weight="1"
+            android:layout_marginRight="5dp"/>
+
+        <Button
+            android:id="@+id/cancel_media"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#D93434"
+            android:text="Abbrechen"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+</LinearLayout>

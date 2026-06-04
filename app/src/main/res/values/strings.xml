@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Library</string>
+
+    <string-array name="sort_field">
+        <item>Sortieren nach...</item>
+        <item>Titel</item>
+        <item>Autor</item>
+    </string-array>
+
+    <string-array name="sort_direction">
+        <item>Aufsteigend</item>
+        <item>Absteigend</item>
+    </string-array>
+</resources>
