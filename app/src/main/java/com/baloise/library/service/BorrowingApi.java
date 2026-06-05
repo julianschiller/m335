@@ -18,18 +18,46 @@ import retrofit2.http.Path;
  * @author Julian Schiller
  */
 public interface BorrowingApi {
+    /**
+     * Gibt alle Ausleihen zurück.
+     *
+     * @return Liste aller Ausleihen
+     */
     @GET("/bibliothek/ausleihen")
     Call<List<Ausleihe>> getBorrowings();
 
+    /**
+     * Gibt eine einzelne Ausleihe anhand der Medien-ID zurück.
+     *
+     * @param id die Medien-ID
+     * @return die gefundene Ausleihe
+     */
     @GET("/bibliothek/ausleihe/medium/{id}")
     Call<Ausleihe> getBorrowing(@Path("id") Long id);
 
+    /**
+     * Verlängert eine bestehende Ausleihe.
+     *
+     * @param id die Medien-ID der Ausleihe
+     * @return die aktualisierte Ausleihe
+     */
     @PATCH("/bibliothek/ausleihe/medium/{id}")
     Call<Ausleihe> extendBorrowing(@Path("id") Long id);
 
+    /**
+     * Erstellt eine neue Ausleihe.
+     *
+     * @param borrowing die zu erstellende Ausleihe
+     * @return die erstellte Ausleihe
+     */
     @POST("/bibliothek/ausleihe")
     Call<Ausleihe> createBorrowing(@Body Ausleihe borrowing);
 
+    /**
+     * Löscht eine Ausleihe anhand der Medien-ID.
+     *
+     * @param id die Medien-ID der zu löschenden Ausleihe
+     */
     @DELETE("/bibliothek/ausleihe/medium/{id}")
     Call<Void> deleteBorrowing(@Path("id") Long id);
 }
