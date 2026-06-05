@@ -24,6 +24,7 @@ import com.baloise.library.adapter.MediaAdapter;
 import com.baloise.library.common.Medium;
 import com.baloise.library.service.MediaApi;
 import com.baloise.library.service.RetrofitFactory;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -133,13 +134,13 @@ public class MainActivity extends AppCompatActivity {
                     originalMedias.addAll(response.body());
                     adapter.notifyDataSetChanged();
                 } else {
-                    Toast.makeText(MainActivity.this, "Fehler: " + response.code(), Toast.LENGTH_SHORT).show();
+                    showError("Laden der Medien nicht möglich");
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<List<Medium>> call, @NonNull Throwable throwable) {
-                Toast.makeText(MainActivity.this, "No Connection: " + throwable.getMessage(), Toast.LENGTH_LONG).show();
+                showError("No Connection");
             }
         });
     }
@@ -170,5 +171,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
         adapter.notifyDataSetChanged();
+    }
+
+    private void showError(String message) {
+        new MaterialAlertDialogBuilder(this)
+                .setTitle("Fehler")
+                .setMessage(message)
+                .setPositiveButton("OK", null)
+                .show();
     }
 }

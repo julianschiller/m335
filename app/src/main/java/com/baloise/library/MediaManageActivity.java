@@ -14,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.baloise.library.common.Medium;
 import com.baloise.library.service.MediaApi;
 import com.baloise.library.service.RetrofitFactory;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -91,14 +92,13 @@ public class MediaManageActivity extends AppCompatActivity {
                     location_code.setText(media.getStandort() != null ? media.getStandort() : "");
                     min_age.setText(media.getFsk() != null ? String.valueOf(media.getFsk()) : "");
                 } else {
-                    Toast.makeText(MediaManageActivity.this, "Fehler: " + response.code(), Toast.LENGTH_SHORT).show();
+                    showError("Laden des Mediums nicht möglich");
                 }
             }
 
             @Override
             public void onFailure(Call<Medium> call, Throwable throwable) {
-                Toast.makeText(MediaManageActivity.this,
-                        "No Connection: " + throwable.getMessage(), Toast.LENGTH_LONG).show();
+                showError("No Connection");
             }
         });
     }
@@ -156,14 +156,13 @@ public class MediaManageActivity extends AppCompatActivity {
                     if (response.isSuccessful()) {
                         startActivity(new Intent(MediaManageActivity.this, MainActivity.class));
                     } else {
-                        Toast.makeText(MediaManageActivity.this, "Fehler: " + response.code(), Toast.LENGTH_SHORT).show();
+                        showError("Bearbeiten des Mediums nicht möglich");
                     }
                 }
 
                 @Override
                 public void onFailure(Call<Medium> call, Throwable throwable) {
-                    Toast.makeText(MediaManageActivity.this,
-                            "No Connection: " + throwable.getMessage(), Toast.LENGTH_LONG).show();
+                    showError("No Connection");
                 }
             });
         } else {
@@ -173,14 +172,13 @@ public class MediaManageActivity extends AppCompatActivity {
                     if (response.isSuccessful()) {
                         startActivity(new Intent(MediaManageActivity.this, MainActivity.class));
                     } else {
-                        Toast.makeText(MediaManageActivity.this, "Fehler: " + response.code(), Toast.LENGTH_SHORT).show();
+                        showError("Erstellen des Mediums nicht möglich");
                     }
                 }
 
                 @Override
                 public void onFailure(Call<Medium> call, Throwable throwable) {
-                    Toast.makeText(MediaManageActivity.this,
-                            "No Connection: " + throwable.getMessage(), Toast.LENGTH_LONG).show();
+                            showError("No Connection");
                 }
             });
         }
@@ -196,5 +194,13 @@ public class MediaManageActivity extends AppCompatActivity {
         medium.setStandort(location_code.getText() != null ? location_code.getText().toString() : null);
 
         return medium;
+    }
+
+    private void showError(String message) {
+        new MaterialAlertDialogBuilder(this)
+                .setTitle("Fehler")
+                .setMessage(message)
+                .setPositiveButton("OK", null)
+                .show();
     }
 }

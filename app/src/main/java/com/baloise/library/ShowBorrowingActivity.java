@@ -20,6 +20,7 @@ import com.baloise.library.adapter.BorrowingAdapter;
 import com.baloise.library.common.Ausleihe;
 import com.baloise.library.service.BorrowingApi;
 import com.baloise.library.service.RetrofitFactory;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -75,14 +76,14 @@ public class ShowBorrowingActivity extends AppCompatActivity {
                     borrowings.addAll(response.body());
                     adapter.notifyDataSetChanged();
                 } else {
-                    Toast.makeText(ShowBorrowingActivity.this, "Fehler: " + response.code(), Toast.LENGTH_SHORT).show();
+                    showError("Laden der Ausleihen nicht möglich");
                 }
 
             }
 
             @Override
             public void onFailure(Call<List<Ausleihe>> call, Throwable throwable) {
-                Toast.makeText(ShowBorrowingActivity.this, "No Connection: " + throwable.getMessage(), Toast.LENGTH_LONG).show();
+                showError("No Connection");
             }
         });
 
@@ -106,5 +107,13 @@ public class ShowBorrowingActivity extends AppCompatActivity {
             return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    private void showError(String message) {
+        new MaterialAlertDialogBuilder(this)
+                .setTitle("Fehler")
+                .setMessage(message)
+                .setPositiveButton("OK", null)
+                .show();
     }
 }

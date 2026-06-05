@@ -17,6 +17,7 @@ import com.baloise.library.MediaManageActivity;
 import com.baloise.library.R;
 import com.baloise.library.common.Ausleihe;
 import com.baloise.library.common.Medium;
+import com.baloise.library.service.BorrowingApi;
 import com.baloise.library.service.MediaApi;
 import com.baloise.library.service.RetrofitFactory;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -98,40 +99,46 @@ public class BorrowingAdapter extends RecyclerView.Adapter<BorrowingAdapter.Borr
         holder.customerId.setText(String.valueOf(a.getKunde().getId()));
         holder.customerName.setText(a.getKunde().getVorname() + " " + a.getKunde().getFamilienname());
         holder.returnDate.setText(a.getFaelligkeitsdatumLokalisiert());
-/*
+
         holder.deleteButton.setOnClickListener(view -> {
-            String message = "Medium \"" + m.getTitel() + "\" sicher löschen?";
+            String message = "Medium \"" + a.getMedium().getTitel() + "\" sicher zurückgegeben?";
             new MaterialAlertDialogBuilder(view.getContext())
-                    .setTitle("Medium löschen")
+                    .setTitle("Ausleihe beenden")
                     .setMessage(message)
                     .setPositiveButton("Ja", (dialog, which) -> {
-                        MediaApi api = RetrofitFactory.getRetrofitInstance().create(MediaApi.class);
+                        BorrowingApi api = RetrofitFactory.getRetrofitInstance().create(BorrowingApi.class);
 
-                        api.deleteMedia(m.getId()).enqueue(new Callback<Void>() {
+                        api.deleteBorrowing(a.getMedium().getId()).enqueue(new Callback<Void>() {
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response) {
                                 if (response.isSuccessful()) {
                                     int pos = holder.getBindingAdapterPosition();
                                     if (pos != RecyclerView.NO_POSITION) {
-                                        medien.remove(pos);
+                                        borrowings.remove(pos);
                                         notifyItemRemoved(pos);
                                     }
                                 } else {
-                                    Toast.makeText(view.getContext(),
-                                            "Fehler: " + response.code(), Toast.LENGTH_SHORT).show();
+                                    new MaterialAlertDialogBuilder(view.getContext())
+                                            .setTitle("Fehler")
+                                            .setMessage("Löschen fehlgeschlagen")
+                                            .setPositiveButton("OK", null)
+                                            .show();
                                 }
                             }
 
                             @Override
                             public void onFailure(Call<Void> call, Throwable throwable) {
-                                Toast.makeText(view.getContext(),
-                                        "No Connection: " + throwable.getMessage(), Toast.LENGTH_LONG).show();
+                                new MaterialAlertDialogBuilder(view.getContext())
+                                        .setTitle("Fehler")
+                                        .setMessage("No Connection")
+                                        .setPositiveButton("OK", null)
+                                        .show();
                             }
                         });
                     })
                     .setNegativeButton("Nein", null)
                     .show();
-        }); */
+        });
 
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(view.getContext(), BorrowingManageActivity.class);

@@ -15,6 +15,7 @@ import com.baloise.library.common.Ausleihe;
 import com.baloise.library.common.Medium;
 import com.baloise.library.service.BorrowingApi;
 import com.baloise.library.service.RetrofitFactory;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -100,13 +101,13 @@ public class BorrowingManageActivity extends AppCompatActivity {
                     borrowed.setText(ausleihe.getLeihdatumLokalisiert());
                     returnUntil.setText(ausleihe.getFaelligkeitsdatumLokalisiert());
                 } else {
-                    Toast.makeText(BorrowingManageActivity.this, "Fehler: " + response.code(), Toast.LENGTH_SHORT).show();
+                    showError("Laden der Ausleihe fehlgeschlagen");
                 }
             }
 
             @Override
             public void onFailure(Call<Ausleihe> call, Throwable throwable) {
-                Toast.makeText(BorrowingManageActivity.this, "No Connection: " + throwable.getMessage(), Toast.LENGTH_LONG).show();
+                showError("No Connection");
             }
         });
 
@@ -123,13 +124,13 @@ public class BorrowingManageActivity extends AppCompatActivity {
                     if (response.isSuccessful()) {
                         startActivity(new Intent(BorrowingManageActivity.this, ShowBorrowingActivity.class));
                     } else {
-                        Toast.makeText(BorrowingManageActivity.this, "Fehler: " + response.code(), Toast.LENGTH_SHORT).show();
+                        showError("Verlängern nicht möglich");
                     }
                 }
 
                 @Override
                 public void onFailure(Call<Ausleihe> call, Throwable throwable) {
-                    Toast.makeText(BorrowingManageActivity.this, "No Connection: " + throwable.getMessage(), Toast.LENGTH_LONG).show();
+                    showError("No Connection");
                 }
             });
         });
@@ -154,14 +155,13 @@ public class BorrowingManageActivity extends AppCompatActivity {
                     if (response.isSuccessful()) {
                         startActivity(new Intent(BorrowingManageActivity.this, ShowBorrowingActivity.class));
                     } else {
-                        Toast.makeText(BorrowingManageActivity.this, "Fehler: " + response.code(), Toast.LENGTH_SHORT).show();
+                        showError("Ausleihe nicht möglich");
                     }
                 }
 
                 @Override
                 public void onFailure(Call<Ausleihe> call, Throwable throwable) {
-                    Toast.makeText(BorrowingManageActivity.this,
-                            "No Connection: " + throwable.getMessage(), Toast.LENGTH_LONG).show();
+                    showError("No Connection");
                 }
             });
         });
@@ -193,5 +193,13 @@ public class BorrowingManageActivity extends AppCompatActivity {
         }
 
         return valid;
+    }
+
+    private void showError(String message) {
+        new MaterialAlertDialogBuilder(this)
+                .setTitle("Fehler")
+                .setMessage(message)
+                .setPositiveButton("OK", null)
+                .show();
     }
 }

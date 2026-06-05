@@ -96,13 +96,21 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaViewHol
                                 notifyItemRemoved(pos);
                             }
                         } else {
-                            Toast.makeText(view.getContext(), "Fehler: " + response.code(), Toast.LENGTH_SHORT).show();
+                            new MaterialAlertDialogBuilder(view.getContext())
+                                    .setTitle("Fehler")
+                                    .setMessage("Löschen fehlgeschlagen")
+                                    .setPositiveButton("OK", null)
+                                    .show();
                         }
                     }
 
                     @Override
                     public void onFailure(@NonNull Call<Void> call, @NonNull Throwable throwable) {
-                        Toast.makeText(view.getContext(), "No Connection: " + throwable.getMessage(), Toast.LENGTH_LONG).show();
+                        new MaterialAlertDialogBuilder(view.getContext())
+                                .setTitle("Fehler")
+                                .setMessage("No Connection")
+                                .setPositiveButton("OK", null)
+                                .show();
                     }
                 });
             }).setNegativeButton("Nein", null).show();
@@ -122,4 +130,6 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaViewHol
     public int getItemCount() {
         return medien.size();
     }
+
+
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
@@ -23,4 +24,7 @@ public interface BorrowingApi {
 
     @POST("/bibliothek/ausleihe")
     Call<Ausleihe> createBorrowing(@Body Ausleihe borrowing);
+
+    @DELETE("/bibliothek/ausleihe/medium/{id}")
+    Call<Void> deleteBorrowing(@Path("id") Long id);
 }
