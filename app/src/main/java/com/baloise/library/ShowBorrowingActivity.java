@@ -5,14 +5,33 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.baloise.library.adapter.BorrowingAdapter;
+import com.baloise.library.common.Ausleihe;
+import com.baloise.library.service.BorrowingApi;
+import com.baloise.library.service.RetrofitFactory;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ShowBorrowingActivity extends AppCompatActivity {
+
+    private RecyclerView recyclerView;
+    private BorrowingAdapter adapter;
+    private List<Ausleihe> borrowings = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +43,41 @@ public class ShowBorrowingActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+
+        recyclerView = findViewById(R.id.borrowing_list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        adapter = new BorrowingAdapter(borrowings);
+        recyclerView.setAdapter(adapter);
+
+        loadBorrowings();
     }
+
+    private void loadBorrowings() {
+        BorrowingApi api = RetrofitFactory.getRetrofitInstance().create(BorrowingApi.class);
+
+        api.getBorrowings().enqueue(new Callback<List<Ausleihe>>() {
+            @Override
+            public void onResponse(Call<List<Ausleihe>> call, Response<List<Ausleihe>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    borrowings.clear();
+                    borrowings.addAll(response.body());
+                    adapter.notifyDataSetChanged();
+                } else {
+                    Toast.makeText(ShowBorrowingActivity.this, "Fehler: " + response.code(), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Ausleihe>> call, Throwable throwable) {
+                Toast.makeText(ShowBorrowingActivity.this, "No Connection: " + throwable.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

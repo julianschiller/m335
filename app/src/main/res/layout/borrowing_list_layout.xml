@@ -2,10 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="16dp"
+    android:background="?attr/selectableItemBackground"
     android:gravity="center_vertical"
-    android:background="?attr/selectableItemBackground">
+    android:orientation="horizontal"
+    android:padding="16dp">
 
     <LinearLayout
         android:layout_width="0dp"
@@ -22,17 +22,41 @@
                 android:id="@+id/customer_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:text="42"
-                android:textStyle="bold"
-                android:layout_marginEnd="8dp" />
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/customer_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="Max Mustermann"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
 
             <TextView
                 android:id="@+id/item_inv_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:text="Inv-Nmr"
                 android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/media_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mein Buch"
+                android:textStyle="bold" />
         </LinearLayout>
+
 
         <TextView
             android:id="@+id/item_return_date"
@@ -43,11 +67,11 @@
     </LinearLayout>
 
     <ImageButton
-        android:id="@+id/item_delete"
+        android:id="@+id/item_borrowing_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_menu_delete"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="Löschen" />
+        android:contentDescription="Löschen"
+        android:src="@android:drawable/ic_menu_delete" />
 
 </LinearLayout>

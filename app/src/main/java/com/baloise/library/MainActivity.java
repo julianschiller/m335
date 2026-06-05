@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
         loadMedias();
     }
 
@@ -140,8 +139,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<List<Medium>> call, @NonNull Throwable throwable) {
-                Toast.makeText(MainActivity.this,
-                        "No Connection: " + throwable.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "No Connection: " + throwable.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
