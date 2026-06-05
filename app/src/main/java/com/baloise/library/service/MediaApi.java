@@ -21,13 +21,13 @@ public interface MediaApi {
     @GET("/bibliothek/medien")
     Call<List<Medium>> getMedias();
 
-    @POST("medium")
+    @POST("/bibliothek/medium")
     Call<Medium> createMedia(@Body Medium medium);
 
     @PATCH("/bibliothek/medium/{id}")
     Call<Medium> editMedia(@Path("id") Long id, @Body Medium medium);
 
-    @DELETE("medium/{id}")
+    @DELETE("/bibliothek/medium/{id}")
     Call<Void> deleteMedia(@Path("id") Long id);
 
 }

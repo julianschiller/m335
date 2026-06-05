@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private MediaAdapter adapter;
     private List<Medium> medias = new ArrayList<>();
+    private Button createNew;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,15 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new MediaAdapter(medias);
         recyclerView.setAdapter(adapter);
+
+        createNew = findViewById(R.id.add_media);
+        createNew.setOnClickListener(view -> {
+            Intent intent = new Intent(view.getContext(), MediaManageActivity.class);
+
+            intent.putExtra("create", true);
+
+            view.getContext().startActivity(intent);
+        });
 
         loadMedias();
     }

@@ -15,6 +15,7 @@ import com.baloise.library.common.Medium;
 import com.baloise.library.service.MediaApi;
 import com.baloise.library.service.RetrofitFactory;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,6 +31,9 @@ public class MediaManageActivity extends AppCompatActivity {
     private TextInputEditText min_age;
     private Button save;
     private Button cancel;
+
+    private TextInputLayout titleLayout;
+    private TextInputLayout authorLayout;
 
     private boolean isCreate;
     private Long id;
@@ -58,6 +62,8 @@ public class MediaManageActivity extends AppCompatActivity {
         min_age = findViewById(R.id.input_age);
         save = findViewById(R.id.save_media);
         cancel = findViewById(R.id.cancel_media);
+        titleLayout  = findViewById(R.id.layout_title);
+        authorLayout = findViewById(R.id.layout_author);
         cancel.setOnClickListener(view -> {
             Intent intent = new Intent(view.getContext(), MainActivity.class);
 
@@ -65,7 +71,7 @@ public class MediaManageActivity extends AppCompatActivity {
         });
 
         if (isCreate) {
-
+            createMedia();
         } else {
             loadMedia(id);
             editMedia();
@@ -97,20 +103,48 @@ public class MediaManageActivity extends AppCompatActivity {
         });
     }
 
+    private void createMedia() {
+
+        save.setOnClickListener(view -> {
+            if (!isValid()){
+                return;
+            }
+
+            Medium medium = getMedium();
+            saveMedia(null, medium);
+        });
+
+
+    }
+
+    private boolean isValid() {
+        boolean valid = true;
+
+        if (title.getText().toString().trim().isEmpty()) {
+            titleLayout.setError("Titel ist erforderlich");
+            valid = false;
+        } else {
+            titleLayout.setError(null);
+        }
+
+        if (author.getText().toString().trim().isEmpty()) {
+            authorLayout.setError("Autor ist erforderlich");
+            valid = false;
+        } else {
+            authorLayout.setError(null);
+        }
+
+        return valid;
+    }
+
     private void editMedia() {
         title.setEnabled(false);
         author.setEnabled(false);
 
         save.setOnClickListener(view -> {
 
-            Medium medium = new Medium(title.getText().toString(), author.getText().toString());
-            medium.setEan(!isbn.getText().toString().trim().isEmpty() ? Long.valueOf(isbn.getText().toString()) : null);
-            medium.setFsk(!min_age.getText().toString().trim().isEmpty()  ? Short.valueOf(min_age.getText().toString()) : null);
-            medium.setGenre(genre.getText() != null ? genre.getText().toString() : null);
-            medium.setStandort(location_code.getText() != null ? location_code.getText().toString() : null);
-
+            Medium medium = getMedium();
             saveMedia(id, medium);
-
         });
     }
 
@@ -133,9 +167,34 @@ public class MediaManageActivity extends AppCompatActivity {
                 }
             });
         } else {
+            api.createMedia(medium).enqueue(new Callback<Medium>() {
+                @Override
+                public void onResponse(Call<Medium> call, Response<Medium> response) {
+                    if (response.isSuccessful()) {
+                        startActivity(new Intent(MediaManageActivity.this, MainActivity.class));
+                    } else {
+                        Toast.makeText(MediaManageActivity.this, "Fehler: " + response.code(), Toast.LENGTH_SHORT).show();
+                    }
+                }
 
+                @Override
+                public void onFailure(Call<Medium> call, Throwable throwable) {
+                    Toast.makeText(MediaManageActivity.this,
+                            "No Connection: " + throwable.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
         }
 
 
+    }
+
+    private Medium getMedium() {
+        Medium medium = new Medium(title.getText().toString(), author.getText().toString());
+        medium.setEan(!isbn.getText().toString().trim().isEmpty() ? Long.valueOf(isbn.getText().toString()) : null);
+        medium.setFsk(!min_age.getText().toString().trim().isEmpty()  ? Short.valueOf(min_age.getText().toString()) : null);
+        medium.setGenre(genre.getText() != null ? genre.getText().toString() : null);
+        medium.setStandort(location_code.getText() != null ? location_code.getText().toString() : null);
+
+        return medium;
     }
 }
