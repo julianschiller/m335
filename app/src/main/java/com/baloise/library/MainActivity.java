@@ -5,7 +5,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -23,6 +26,8 @@ import com.baloise.library.service.MediaApi;
 import com.baloise.library.service.RetrofitFactory;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import retrofit2.Call;
@@ -34,7 +39,10 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private MediaAdapter adapter;
     private List<Medium> medias = new ArrayList<>();
+    private List<Medium> originalMedias = new ArrayList<>();
     private Button createNew;
+    private Spinner sortCrit;
+    private Spinner sortDirection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +69,35 @@ public class MainActivity extends AppCompatActivity {
 
             view.getContext().startActivity(intent);
         });
+
+        sortCrit = findViewById(R.id.spinner_sort_field);
+        sortDirection = findViewById(R.id.spinner_sort_direction);
+
+        sortCrit.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                sortMedias();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        sortDirection.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                sortMedias();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
 
         loadMedias();
     }
@@ -93,6 +130,8 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     medias.clear();
                     medias.addAll(response.body());
+                    originalMedias.clear();
+                    originalMedias.addAll(response.body());
                     adapter.notifyDataSetChanged();
                 } else {
                     Toast.makeText(MainActivity.this, "Fehler: " + response.code(), Toast.LENGTH_SHORT).show();
@@ -105,5 +144,33 @@ public class MainActivity extends AppCompatActivity {
                         "No Connection: " + throwable.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void sortMedias() {
+        String field = sortCrit.getSelectedItem().toString();
+        String direction = sortDirection.getSelectedItem().toString();
+        boolean descending = direction.equals("Absteigend");
+
+        if (!field.equals("Autor") && !field.equals("Titel")) {
+            medias.clear();
+            medias.addAll(originalMedias);
+            adapter.notifyDataSetChanged();
+            return;
+        }
+
+        Collections.sort(medias, new Comparator<Medium>() {
+            @Override
+            public int compare(Medium a, Medium b) {
+                int result;
+                if (field.equals("Autor")) {
+                    result = a.getAutor().compareToIgnoreCase(b.getAutor());
+                } else {
+                    result = a.getTitel().compareToIgnoreCase(b.getTitel());
+                }
+                return descending ? -result : result;
+            }
+        });
+
+        adapter.notifyDataSetChanged();
     }
 }
