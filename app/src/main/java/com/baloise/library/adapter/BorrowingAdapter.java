@@ -90,6 +90,7 @@ public class BorrowingAdapter extends RecyclerView.Adapter<BorrowingAdapter.Borr
         }
     }
 
+    /** {@inheritDoc} Erstellt einen neuen ViewHolder für einen Ausleihe-Eintrag. */
     @NonNull
     @Override
     public BorrowingViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -98,6 +99,7 @@ public class BorrowingAdapter extends RecyclerView.Adapter<BorrowingAdapter.Borr
         return new BorrowingViewHolder(view);
     }
 
+    /** {@inheritDoc} Befüllt den ViewHolder mit den Daten einer Ausleihe und setzt die Click-Listener. */
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(BorrowingViewHolder holder, int position) {
@@ -158,6 +160,7 @@ public class BorrowingAdapter extends RecyclerView.Adapter<BorrowingAdapter.Borr
         });
     }
 
+    /** {@inheritDoc} Gibt die Anzahl der Ausleihen zurück. */
     @Override
     public int getItemCount() {
         return borrowings.size();

@@ -54,6 +54,7 @@ public class BorrowingManageActivity extends AppCompatActivity {
 
     BorrowingApi api = RetrofitFactory.getRetrofitInstance().create(BorrowingApi.class);
 
+    /** {@inheritDoc} Initialisiert die View-Elemente und entscheidet zwischen Erstellen und Verlängern. */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -46,6 +46,7 @@ public class MediaManageActivity extends AppCompatActivity {
 
     MediaApi api = RetrofitFactory.getRetrofitInstance().create(MediaApi.class);
 
+    /** {@inheritDoc} Initialisiert die Eingabefelder und entscheidet zwischen Erstellen und Bearbeiten. */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

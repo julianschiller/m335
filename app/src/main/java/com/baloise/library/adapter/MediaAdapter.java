@@ -74,6 +74,7 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaViewHol
         }
     }
 
+    /** {@inheritDoc} Erstellt einen neuen ViewHolder für einen Medien-Eintrag. */
     @NonNull
     @Override
     public MediaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -82,6 +83,7 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaViewHol
         return new MediaViewHolder(view);
     }
 
+    /** {@inheritDoc} Befüllt den ViewHolder mit den Daten eines Mediums und setzt die Click-Listener. */
     @Override
     public void onBindViewHolder(MediaViewHolder holder, int position) {
         Medium m = medien.get(position);
@@ -134,6 +136,7 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaViewHol
         });
     }
 
+    /** {@inheritDoc} Gibt die Anzahl der Medien zurück. */
     @Override
     public int getItemCount() {
         return medien.size();

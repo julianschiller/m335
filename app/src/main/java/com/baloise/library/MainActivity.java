@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private Spinner sortCrit;
     private Spinner sortDirection;
 
+    /** {@inheritDoc} Initialisiert die Medienliste, Sortierung und den Erstellen-Button. */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
         loadMedias();
     }
 
+    /** {@inheritDoc} Erstellt das Optionsmenü mit der Navigationsleiste. */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -114,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    /** {@inheritDoc} Behandelt die Navigation zwischen Medien- und Ausleihen-Ansicht. */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.mnu_media) {
