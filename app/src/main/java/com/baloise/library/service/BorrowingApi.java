@@ -12,6 +12,11 @@ import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
+/**
+ * Retrofit-API-Interface für Ausleihe-Endpunkte.
+ *
+ * @author Julian Schiller
+ */
 public interface BorrowingApi {
     @GET("/bibliothek/ausleihen")
     Call<List<Ausleihe>> getBorrowings();

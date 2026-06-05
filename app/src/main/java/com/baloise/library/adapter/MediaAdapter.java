@@ -24,6 +24,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * RecyclerView-Adapter zur Darstellung von Medien mit Lösch- und Bearbeitungsfunktion.
+ *
+ * @author Julian Schiller
+ */
 public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaViewHolder> {
 
     private List<Medium> medien;
@@ -32,6 +37,9 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaViewHol
         this.medien = medien;
     }
 
+    /**
+     * ViewHolder zur Darstellung eines einzelnen Medien-Eintrags.
+     */
     public static class MediaViewHolder extends RecyclerView.ViewHolder {
 
         private TextView invNmbr;

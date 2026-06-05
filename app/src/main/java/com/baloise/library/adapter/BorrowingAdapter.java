@@ -28,6 +28,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * RecyclerView-Adapter zur Darstellung von Ausleihen mit Lösch- und Bearbeitungsfunktion.
+ *
+ * @author Julian Schiller
+ */
 public class BorrowingAdapter extends RecyclerView.Adapter<BorrowingAdapter.BorrowingViewHolder> {
 
     private List<Ausleihe> borrowings;
@@ -36,6 +41,9 @@ public class BorrowingAdapter extends RecyclerView.Adapter<BorrowingAdapter.Borr
         this.borrowings = borrowings;
     }
 
+    /**
+     * ViewHolder zur Darstellung eines einzelnen Ausleihe-Eintrags.
+     */
     public static class BorrowingViewHolder extends RecyclerView.ViewHolder {
 
         private TextView customerId;

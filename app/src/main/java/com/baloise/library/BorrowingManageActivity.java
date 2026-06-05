@@ -31,6 +31,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Activity zum Erstellen und Verlängern von Ausleihen.
+ *
+ * @author Julian Schiller
+ */
 public class BorrowingManageActivity extends AppCompatActivity {
 
     private TextInputEditText customerId;
@@ -90,6 +95,11 @@ public class BorrowingManageActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Lädt eine bestehende Ausleihe vom Backend und befüllt die Eingabefelder.
+     *
+     * @param id die Medien-ID der Ausleihe
+     */
     private void loadBorrowing(Long id) {
         api.getBorrowing(id).enqueue(new Callback<Ausleihe>() {
             @Override
@@ -115,6 +125,11 @@ public class BorrowingManageActivity extends AppCompatActivity {
         invNmr.setEnabled(false);
     }
 
+    /**
+     * Konfiguriert den Speichern-Button zum Verlängern einer Ausleihe.
+     *
+     * @param id die Medien-ID der zu verlängernden Ausleihe
+     */
     private void extendBorrowing(Long id) {
         save.setText("Verlängern");
         save.setOnClickListener(view -> {
@@ -136,6 +151,9 @@ public class BorrowingManageActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Konfiguriert die Eingabefelder und den Speichern-Button zum Erstellen einer neuen Ausleihe.
+     */
     private void createBorrowing() {
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DAY_OF_MONTH, 14);
@@ -167,6 +185,11 @@ public class BorrowingManageActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Validiert die Eingabefelder für Kunden-ID und Medien-ID.
+     *
+     * @return true wenn alle Pflichtfelder gültig sind
+     */
     private boolean isValid() {
         boolean valid = true;
         String customerIdText = customerId.getText().toString().trim();
@@ -195,6 +218,11 @@ public class BorrowingManageActivity extends AppCompatActivity {
         return valid;
     }
 
+    /**
+     * Zeigt einen Fehlerdialog mit der übergebenen Nachricht an.
+     *
+     * @param message die anzuzeigende Fehlermeldung
+     */
     private void showError(String message) {
         new MaterialAlertDialogBuilder(this)
                 .setTitle("Fehler")

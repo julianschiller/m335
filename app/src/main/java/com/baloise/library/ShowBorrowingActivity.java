@@ -29,6 +29,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Activity zur Anzeige aller Ausleihen in einer Liste.
+ *
+ * @author Julian Schiller
+ */
 public class ShowBorrowingActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
@@ -65,6 +70,9 @@ public class ShowBorrowingActivity extends AppCompatActivity {
         loadBorrowings();
     }
 
+    /**
+     * Lädt alle Ausleihen vom Backend und aktualisiert die Liste.
+     */
     private void loadBorrowings() {
         BorrowingApi api = RetrofitFactory.getRetrofitInstance().create(BorrowingApi.class);
 
@@ -109,6 +117,11 @@ public class ShowBorrowingActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Zeigt einen Fehlerdialog mit der übergebenen Nachricht an.
+     *
+     * @param message die anzuzeigende Fehlermeldung
+     */
     private void showError(String message) {
         new MaterialAlertDialogBuilder(this)
                 .setTitle("Fehler")

@@ -12,6 +12,11 @@ import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
+/**
+ * Retrofit-API-Interface für Medien-Endpunkte.
+ *
+ * @author Julian Schiller
+ */
 public interface MediaApi {
 
     @GET("/bibliothek/medium/{id}")

@@ -22,6 +22,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Activity zum Erstellen und Bearbeiten von Medien.
+ *
+ * @author Julian Schiller
+ */
 public class MediaManageActivity extends AppCompatActivity {
 
     private TextInputEditText title;
@@ -79,6 +84,11 @@ public class MediaManageActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Lädt ein bestehendes Medium vom Backend und befüllt die Eingabefelder.
+     *
+     * @param id die ID des zu ladenden Mediums
+     */
     private void loadMedia(Long id) {
         api.getMedia(id).enqueue(new Callback<Medium>() {
             @Override
@@ -103,6 +113,9 @@ public class MediaManageActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Konfiguriert den Speichern-Button zum Erstellen eines neuen Mediums.
+     */
     private void createMedia() {
 
         save.setOnClickListener(view -> {
@@ -117,6 +130,11 @@ public class MediaManageActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Validiert die Pflichtfelder Titel und Autor.
+     *
+     * @return true wenn alle Pflichtfelder ausgefüllt sind
+     */
     private boolean isValid() {
         boolean valid = true;
 
@@ -137,6 +155,9 @@ public class MediaManageActivity extends AppCompatActivity {
         return valid;
     }
 
+    /**
+     * Konfiguriert die Ansicht und den Speichern-Button zum Bearbeiten eines Mediums.
+     */
     private void editMedia() {
         title.setEnabled(false);
         author.setEnabled(false);
@@ -148,6 +169,12 @@ public class MediaManageActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Speichert ein Medium über die API, erstellt oder aktualisiert je nach übergebener ID.
+     *
+     * @param id die ID des Mediums (null für Neuerstellung)
+     * @param medium das zu speichernde Medium-Objekt
+     */
     private void saveMedia(Long id, Medium medium) {
         if (id != null) {
             api.editMedia(id, medium).enqueue(new Callback<Medium>() {
@@ -186,6 +213,11 @@ public class MediaManageActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Erstellt ein Medium-Objekt aus den aktuellen Eingabefeldern.
+     *
+     * @return das zusammengestellte Medium-Objekt
+     */
     private Medium getMedium() {
         Medium medium = new Medium(title.getText().toString(), author.getText().toString());
         medium.setEan(!isbn.getText().toString().trim().isEmpty() ? Long.valueOf(isbn.getText().toString()) : null);
@@ -196,6 +228,11 @@ public class MediaManageActivity extends AppCompatActivity {
         return medium;
     }
 
+    /**
+     * Zeigt einen Fehlerdialog mit der übergebenen Nachricht an.
+     *
+     * @param message die anzuzeigende Fehlermeldung
+     */
     private void showError(String message) {
         new MaterialAlertDialogBuilder(this)
                 .setTitle("Fehler")

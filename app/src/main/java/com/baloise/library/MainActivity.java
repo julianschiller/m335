@@ -35,6 +35,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+/**
+ * Hauptaktivität zur Anzeige und Verwaltung der Medienliste mit Sortierfunktion.
+ *
+ * @author Julian Schiller
+ */
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
@@ -121,6 +126,9 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * Lädt alle Medien vom Backend und aktualisiert die Liste.
+     */
     private void loadMedias() {
         MediaApi api = RetrofitFactory.getRetrofitInstance().create(MediaApi.class);
 
@@ -145,6 +153,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Sortiert die Medienliste nach dem gewählten Kriterium und der Richtung.
+     */
     private void sortMedias() {
         String field = sortCrit.getSelectedItem().toString();
         String direction = sortDirection.getSelectedItem().toString();
@@ -173,6 +184,11 @@ public class MainActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
+    /**
+     * Zeigt einen Fehlerdialog mit der übergebenen Nachricht an.
+     *
+     * @param message die anzuzeigende Fehlermeldung
+     */
     private void showError(String message) {
         new MaterialAlertDialogBuilder(this)
                 .setTitle("Fehler")
