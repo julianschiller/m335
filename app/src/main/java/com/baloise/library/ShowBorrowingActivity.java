@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -32,6 +33,7 @@ public class ShowBorrowingActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private BorrowingAdapter adapter;
     private List<Ausleihe> borrowings = new ArrayList<>();
+    private Button createNew;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,14 @@ public class ShowBorrowingActivity extends AppCompatActivity {
 
         adapter = new BorrowingAdapter(borrowings);
         recyclerView.setAdapter(adapter);
+
+        createNew = findViewById(R.id.add_borrowing);
+        createNew.setOnClickListener(view -> {
+            Intent intent = new Intent(view.getContext(), BorrowingManageActivity.class);
+
+            intent.putExtra("create", true);
+            view.getContext().startActivity(intent);
+        });
 
         loadBorrowings();
     }

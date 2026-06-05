@@ -10,6 +10,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/customer_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Kunden-ID *"
@@ -25,6 +26,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/media_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Inventar-Nummer *"
@@ -76,7 +78,7 @@
         android:layout_marginHorizontal="10dp">
 
         <Button
-            android:id="@+id/save_media"
+            android:id="@+id/save_borrowing"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:backgroundTint="#1cc744"
@@ -85,7 +87,7 @@
             android:layout_marginRight="5dp"/>
 
         <Button
-            android:id="@+id/cancel_media"
+            android:id="@+id/cancel_borrowing"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:backgroundTint="#D93434"

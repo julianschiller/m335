@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.baloise.library.BorrowingManageActivity;
 import com.baloise.library.MediaManageActivity;
 import com.baloise.library.R;
 import com.baloise.library.common.Ausleihe;
@@ -55,19 +56,35 @@ public class BorrowingAdapter extends RecyclerView.Adapter<BorrowingAdapter.Borr
 
         }
 
-        public TextView getInvNmbr() {return invNmbr; }
-        public TextView getCustomerId() {return customerId; }
-        public TextView getCustomerName() {return customerName; }
-        public TextView getMediaName() {return mediaName; }
-        public TextView getReturnDate() {return returnDate; }
-        public ImageButton getDeleteButton() {return deleteButton; }
+        public TextView getInvNmbr() {
+            return invNmbr;
+        }
+
+        public TextView getCustomerId() {
+            return customerId;
+        }
+
+        public TextView getCustomerName() {
+            return customerName;
+        }
+
+        public TextView getMediaName() {
+            return mediaName;
+        }
+
+        public TextView getReturnDate() {
+            return returnDate;
+        }
+
+        public ImageButton getDeleteButton() {
+            return deleteButton;
+        }
     }
 
     @NonNull
     @Override
     public BorrowingViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.borrowing_list_layout, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.borrowing_list_layout, parent, false);
 
         return new BorrowingViewHolder(view);
     }
@@ -117,7 +134,12 @@ public class BorrowingAdapter extends RecyclerView.Adapter<BorrowingAdapter.Borr
         }); */
 
         holder.itemView.setOnClickListener(view -> {
+            Intent intent = new Intent(view.getContext(), BorrowingManageActivity.class);
 
+            intent.putExtra("media_id", a.getMedium().getId());
+            intent.putExtra("create", false);
+
+            view.getContext().startActivity(intent);
         });
     }
 

@@ -49,17 +49,27 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaViewHol
 
         }
 
-        public TextView getInvNmbr() {return invNmbr; }
-        public TextView getTitle() {return title; }
-        public TextView getAuthor() {return author; }
-        public ImageButton getDeleteButton() {return deleteButton; }
+        public TextView getInvNmbr() {
+            return invNmbr;
+        }
+
+        public TextView getTitle() {
+            return title;
+        }
+
+        public TextView getAuthor() {
+            return author;
+        }
+
+        public ImageButton getDeleteButton() {
+            return deleteButton;
+        }
     }
 
     @NonNull
     @Override
     public MediaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.media_list_layout, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.media_list_layout, parent, false);
 
         return new MediaViewHolder(view);
     }
@@ -73,36 +83,29 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaViewHol
 
         holder.deleteButton.setOnClickListener(view -> {
             String message = "Medium \"" + m.getTitel() + "\" sicher löschen?";
-            new MaterialAlertDialogBuilder(view.getContext())
-                    .setTitle("Medium löschen")
-                    .setMessage(message)
-                    .setPositiveButton("Ja", (dialog, which) -> {
-                        MediaApi api = RetrofitFactory.getRetrofitInstance().create(MediaApi.class);
+            new MaterialAlertDialogBuilder(view.getContext()).setTitle("Medium löschen").setMessage(message).setPositiveButton("Ja", (dialog, which) -> {
+                MediaApi api = RetrofitFactory.getRetrofitInstance().create(MediaApi.class);
 
-                        api.deleteMedia(m.getId()).enqueue(new Callback<Void>() {
-                            @Override
-                            public void onResponse(Call<Void> call, Response<Void> response) {
-                                if (response.isSuccessful()) {
-                                    int pos = holder.getBindingAdapterPosition();
-                                    if (pos != RecyclerView.NO_POSITION) {
-                                        medien.remove(pos);
-                                        notifyItemRemoved(pos);
-                                    }
-                                } else {
-                                    Toast.makeText(view.getContext(),
-                                            "Fehler: " + response.code(), Toast.LENGTH_SHORT).show();
-                                }
+                api.deleteMedia(m.getId()).enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
+                        if (response.isSuccessful()) {
+                            int pos = holder.getBindingAdapterPosition();
+                            if (pos != RecyclerView.NO_POSITION) {
+                                medien.remove(pos);
+                                notifyItemRemoved(pos);
                             }
+                        } else {
+                            Toast.makeText(view.getContext(), "Fehler: " + response.code(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
 
-                            @Override
-                            public void onFailure(Call<Void> call, Throwable throwable) {
-                                Toast.makeText(view.getContext(),
-                                        "No Connection: " + throwable.getMessage(), Toast.LENGTH_LONG).show();
-                            }
-                        });
-                    })
-                    .setNegativeButton("Nein", null)
-                    .show();
+                    @Override
+                    public void onFailure(@NonNull Call<Void> call, @NonNull Throwable throwable) {
+                        Toast.makeText(view.getContext(), "No Connection: " + throwable.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+            }).setNegativeButton("Nein", null).show();
         });
 
         holder.itemView.setOnClickListener(view -> {
