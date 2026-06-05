@@ -15,7 +15,7 @@ import retrofit2.http.Path;
 public interface MediaApi {
 
     @GET("/bibliothek/medium/{id}")
-    Call<Medium> getMedia(@Path("id") int id);
+    Call<Medium> getMedia(@Path("id") Long id);
 
 
     @GET("/bibliothek/medien")
@@ -24,10 +24,10 @@ public interface MediaApi {
     @POST("medium")
     Call<Medium> createMedia(@Body Medium medium);
 
-    @PATCH("medium/{id}")
-    Call<Medium> editMedia(@Path("id") int id, Medium medium);
+    @PATCH("/bibliothek/medium/{id}")
+    Call<Medium> editMedia(@Path("id") Long id, @Body Medium medium);
 
     @DELETE("medium/{id}")
-    Call<Void> deleteMedia(@Path("id") int id);
+    Call<Void> deleteMedia(@Path("id") Long id);
 
 }
