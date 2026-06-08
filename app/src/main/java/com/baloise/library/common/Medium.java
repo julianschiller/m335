@@ -6,6 +6,7 @@ import java.io.Serializable;
  * Bean Klasse fuer Medium
  * 
  * @author Matthias
+ * @author Julian Schiller
  */
 public final class Medium implements Serializable {
 

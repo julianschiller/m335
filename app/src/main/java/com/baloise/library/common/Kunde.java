@@ -10,6 +10,7 @@ import java.util.TimeZone;
  * Bean Klasse fuer Kunde
  * 
  * @author Matthias
+ * @author Julian Schiller
  */
 public final class Kunde implements Serializable {
 

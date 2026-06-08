@@ -6,6 +6,7 @@ import java.io.Serializable;
  * Bean Klasse fuer Addresse (Kundenadresse)
  * 
  * @author Matthias
+ * @author Julian Schiller
  */
 public final class Adresse implements Serializable {
 

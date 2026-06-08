@@ -11,6 +11,7 @@ import java.util.TimeZone;
  * Bean Klasse fuer Ausleihe
  *
  * @author Matthias
+ * @author Julian Schiller
  */
 public final class Ausleihe implements Serializable {
 
