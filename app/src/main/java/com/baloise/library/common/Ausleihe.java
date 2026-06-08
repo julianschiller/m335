@@ -1,8 +1,11 @@
 package com.baloise.library.common;
 
 import java.io.Serializable;
-import java.text.*;
-import java.util.*;
+import java.text.DateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  * Bean Klasse fuer Ausleihe

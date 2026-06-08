@@ -7,18 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.baloise.library.BorrowingManageActivity;
-import com.baloise.library.MediaManageActivity;
 import com.baloise.library.R;
 import com.baloise.library.common.Ausleihe;
-import com.baloise.library.common.Medium;
 import com.baloise.library.service.BorrowingApi;
-import com.baloise.library.service.MediaApi;
 import com.baloise.library.service.RetrofitFactory;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 

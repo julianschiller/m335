@@ -2,7 +2,9 @@ package com.baloise.library.common;
 
 import java.io.Serializable;
 import java.text.DateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  * Bean Klasse fuer Kunde
