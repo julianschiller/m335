@@ -8,6 +8,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -23,6 +24,7 @@ public interface BorrowingApi {
      *
      * @return Liste aller Ausleihen
      */
+    @Headers("Accept: application/json")
     @GET("/bibliothek/ausleihen")
     Call<List<Ausleihe>> getBorrowings();
 
@@ -32,6 +34,7 @@ public interface BorrowingApi {
      * @param id die Medien-ID
      * @return die gefundene Ausleihe
      */
+    @Headers("Accept: application/json")
     @GET("/bibliothek/ausleihe/medium/{id}")
     Call<Ausleihe> getBorrowing(@Path("id") Long id);
 
@@ -41,6 +44,7 @@ public interface BorrowingApi {
      * @param id die Medien-ID der Ausleihe
      * @return die aktualisierte Ausleihe
      */
+    @Headers("Content-Type: application/json")
     @PATCH("/bibliothek/ausleihe/medium/{id}")
     Call<Ausleihe> extendBorrowing(@Path("id") Long id);
 
@@ -50,6 +54,7 @@ public interface BorrowingApi {
      * @param borrowing die zu erstellende Ausleihe
      * @return die erstellte Ausleihe
      */
+    @Headers("Content-Type: application/json")
     @POST("/bibliothek/ausleihe")
     Call<Ausleihe> createBorrowing(@Body Ausleihe borrowing);
 

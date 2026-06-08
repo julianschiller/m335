@@ -8,6 +8,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -25,6 +26,7 @@ public interface MediaApi {
      * @param id die Medien-ID
      * @return das gefundene Medium
      */
+    @Headers("Accept: application/json")
     @GET("/bibliothek/medium/{id}")
     Call<Medium> getMedia(@Path("id") Long id);
 
@@ -33,6 +35,7 @@ public interface MediaApi {
      *
      * @return Liste aller Medien
      */
+    @Headers("Accept: application/json")
     @GET("/bibliothek/medien")
     Call<List<Medium>> getMedias();
 
@@ -42,6 +45,7 @@ public interface MediaApi {
      * @param medium das zu erstellende Medium
      * @return das erstellte Medium
      */
+    @Headers("Content-Type: application/json")
     @POST("/bibliothek/medium")
     Call<Medium> createMedia(@Body Medium medium);
 
@@ -52,6 +56,7 @@ public interface MediaApi {
      * @param medium das aktualisierte Medium-Objekt
      * @return das aktualisierte Medium
      */
+    @Headers("Content-Type: application/json")
     @PATCH("/bibliothek/medium/{id}")
     Call<Medium> editMedia(@Path("id") Long id, @Body Medium medium);
 
